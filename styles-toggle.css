@@ -164,35 +164,24 @@ input:focus-visible, textarea:focus-visible { outline: none; border-color: var(-
   box-shadow: 0 40px 60px -40px rgba(37, 99, 235, 0.25);
 }
 
-.ig-embed {
+behold-widget {
+  display: block;
   width: 100%;
   min-height: 500px;
-  border: none;
-  display: block;
 }
 
 @media (min-width: 48rem) {
-  .ig-embed {
+  behold-widget {
     min-height: 620px;
   }
 }
 
 @media (min-width: 64rem) {
-  .ig-embed {
+  behold-widget {
     min-height: 720px;
   }
 }
 
 .text-center {
   text-align: center;
-}
-
-.lightwidget-widget {
-  min-height: 420px;
-}
-@media (min-width: 48rem) {
-  .lightwidget-widget { min-height: 560px; }
-}
-@media (min-width: 64rem) {
-  .lightwidget-widget { min-height: 660px; }
 }
