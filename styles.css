@@ -155,7 +155,7 @@ input:focus-visible, textarea:focus-visible { outline: none; border-color: var(-
 .ig-embed-wrapper {
   position: relative;
   width: 100%;
-  max-width: min(85vw, 540px);
+  max-width: min(92vw, 950px);
   margin: 0 auto;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -167,19 +167,7 @@ input:focus-visible, textarea:focus-visible { outline: none; border-color: var(-
 behold-widget {
   display: block;
   width: 100%;
-  min-height: 500px;
-}
-
-@media (min-width: 48rem) {
-  behold-widget {
-    min-height: 620px;
-  }
-}
-
-@media (min-width: 64rem) {
-  behold-widget {
-    min-height: 720px;
-  }
+  min-height: 240px;
 }
 
 .text-center {
