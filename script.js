@@ -34,22 +34,6 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear().toString();
 
   const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      const action = form.getAttribute('action') || '';
-      if (action.includes('XXXXXXXX')) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const nombre = encodeURIComponent(formData.get('nombre') || '');
-        const email = encodeURIComponent(formData.get('email') || '');
-        const telefono = encodeURIComponent(formData.get('telefono') || '');
-        const mensaje = encodeURIComponent(`Nombre: ${formData.get('nombre') || ''}\nEmail: ${formData.get('email') || ''}\nTeléfono: ${formData.get('telefono') || ''}\n\nMensaje:\n${formData.get('mensaje') || ''}`);
-        const subject = encodeURIComponent(`Consulta desde web Shaip Domótica - ${formData.get('nombre') || ''}`);
-        window.location.href = `mailto:shaipdomotica@gmail.com?subject=${subject}&body=${mensaje}`;
-      }
-    });
-  }
-
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

@@ -45,7 +45,7 @@
         const telefono = encodeURIComponent(formData.get('telefono') || '');
         const mensaje = encodeURIComponent(`Nombre: ${formData.get('nombre') || ''}\nEmail: ${formData.get('email') || ''}\nTeléfono: ${formData.get('telefono') || ''}\n\nMensaje:\n${formData.get('mensaje') || ''}`);
         const subject = encodeURIComponent(`Consulta desde web Shaip Domótica - ${formData.get('nombre') || ''}`);
-        window.location.href = `mailto:shaipdomotica@gmail.com?subject=${subject}&body=${mensaje}`;
+        window.location.href = `?subject=${subject}&body=${mensaje}`;
       }
     });
   }
