@@ -60,7 +60,7 @@
     });
   }, observerOptions);
 
-  const fadeElements = document.querySelectorAll('section, .service-item, .how-list li, .contact-info, .form');
+  const fadeElements = document.querySelectorAll('section, .service-item, .how-list li, .contact-info, .form, .ig-embed-wrapper');
   fadeElements.forEach((el, idx) => {
     el.classList.add('fade-in');
     el.style.setProperty('--delay', (idx * 0.05) + 's');
