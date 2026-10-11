@@ -30,26 +30,25 @@
     });
   }
 
+  const navToggle = document.getElementById('nav-toggle');
+  const nav = document.querySelector('.nav');
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear().toString();
 
   const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      const action = form.getAttribute('action') || '';
-      if (action.includes('XXXXXXXX')) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const nombre = encodeURIComponent(formData.get('nombre') || '');
-        const email = encodeURIComponent(formData.get('email') || '');
-        const telefono = encodeURIComponent(formData.get('telefono') || '');
-        const mensaje = encodeURIComponent(`Nombre: ${formData.get('nombre') || ''}\nEmail: ${formData.get('email') || ''}\nTeléfono: ${formData.get('telefono') || ''}\n\nMensaje:\n${formData.get('mensaje') || ''}`);
-        const subject = encodeURIComponent(`Consulta desde web Shaip Domótica - ${formData.get('nombre') || ''}`);
-        window.location.href = `?subject=${subject}&body=${mensaje}`;
-      }
-    });
-  }
-
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
