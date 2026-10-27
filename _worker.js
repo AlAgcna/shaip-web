@@ -1,9 +1,9 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const accept = request.headers.get('Accept') || '';
+    const accept = (request.headers.get('Accept') || '').toLowerCase();
     
-    if (accept.includes('text/markdown') && url.pathname === '/') {
+    if ((url.pathname === '/' || url.pathname === '/index.html') && accept.includes('text/markdown')) {
       const markdown = `# Shaip Domótica | Casas y espacios inteligentes
 
 Automatiza tu casa para que trabaje por ti. Controla la iluminación, persianas, climatización y seguridad desde tu móvil.
@@ -35,20 +35,37 @@ Automatiza tu casa para que trabaje por ti. Controla la iluminación, persianas,
 
 © Shaip Domótica. Todos los derechos reservados.
 `;
-      
+    
       return new Response(markdown, {
+        status: 200,
         headers: {
           'Content-Type': 'text/markdown; charset=utf-8',
           'Vary': 'Accept',
-          'X-Content-Type-Options': 'nosniff'
+          'X-Content-Type-Options': 'nosniff',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+          'CDN-Cache-Control': 'no-store'
         }
       });
     }
     
     if (env.ASSETS) {
-      return env.ASSETS.fetch(request);
+      const response = await env.ASSETS.fetch(request);
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('Vary', 'Accept');
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders
+      });
     }
     
-    return fetch(request);
+    const response = await fetch(request);
+    const newHeaders = new Headers(response.headers);
+    newHeaders.set('Vary', 'Accept');
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders
+    });
   }
 };
