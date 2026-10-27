@@ -1,22 +1,40 @@
 ---
 name: shaip-contact-page
-description: Crea la página web estática de contacto de Shaip, empresa de domótica (casas y espacios inteligentes), en 3 archivos (HTML, CSS y JS) con un estilo oscuro, moderno y de tipografía grande. Usa esta skill siempre que el usuario pida una página de contacto, landing, sitio web, "web de Shaip", formulario de contacto, página de presentación o cualquier página para Shaip, aunque no diga "estática" ni mencione la palabra "skill". También úsala para modificar, traducir o actualizar una página de Shaip ya creada (cambiar teléfono, horarios, colores, servicios, textos).
+description: Crea la página web estática de contacto de Shaip, empresa de domótica (casas y espacios inteligentes), en 3 archivos (index.html, styles.css y script.js) con un estilo oscuro, moderno y de tipografía grande. Úsala siempre que el usuario pida una página de contacto, landing, sitio web, "web de Shaip", formulario de contacto o página de presentación para Shaip, aunque no diga "estática" ni mencione la palabra "skill". También para modificar o actualizar una página de Shaip ya creada (teléfono, horarios, colores, servicios, textos). Solo edita archivos: nunca hace commit ni push.
+compatibility: opencode
 ---
 
 # Página de contacto de Shaip
 
 Shaip es una empresa de domótica. Esta skill produce una página web **estática** (sin backend ni frameworks) cuyo objetivo es uno: que un visitante interesado contacte a Shaip en menos de 30 segundos.
 
-## Archivos: máximo 3
+## Regla de oro: git es cosa del usuario
 
-Entrega exactamente estos archivos, nunca más:
+Tu trabajo termina en modificar los archivos del proyecto. El usuario revisa los cambios y hace él mismo el commit y el push.
+
+- **Nunca ejecutes** `git add`, `git commit`, `git push`, `git stash`, `git reset`, `git checkout`, `git restore`, `git rebase`, `git merge`, `git tag` ni ningún otro comando de git que cambie el estado del repositorio, aunque el usuario diga algo ambiguo como "déjalo listo" o "súbelo". Si pide expresamente que lo hagas tú, recuérdale que esta skill lo deja a su cargo y que puede decírtelo fuera de ella.
+- No crees ramas ni toques `.gitignore`, `.git/` ni la configuración de git.
+- Sí puedes usar git **solo para leer**: `git status` y `git diff` para ver qué cambió.
+- Al terminar, lista los archivos que modificaste o creaste para que el usuario sepa qué agregar en su commit. Puedes sugerir un mensaje de commit **como texto en tu respuesta**, sin ejecutarlo.
+
+## Archivos: máximo 3 de código
+
+Crea o edita exactamente estos archivos, nunca más:
 
 - `index.html`: estructura y contenido.
 - `styles.css`: todo el estilo, con variables de color en `:root`.
 - `script.js`: interacciones (animaciones al hacer scroll, barra de navegación, formulario).
 
+Si existe una carpeta `assets/` junto a este `SKILL.md` con una plantilla de esos tres archivos, léela y úsala como base en vez de escribir desde cero. No la modifiques: trabaja sobre los archivos del proyecto.
 
-Limitar a 3 archivos significa que no hay carpeta de imágenes pero tenemos imagenes subidas en la carpeta raiz. Por eso: iconos y logo en **SVG incluido dentro del HTML**, y efectos visuales con CSS (degradados, brillos). Si el usuario aporta un logo o fotos reales, pregúntale si prefiere incrustarlos (SVG o base64) para mantener los 3 archivos, o si acepta una carpeta extra.
+### Imágenes
+
+El límite de 3 archivos se refiere al código. El proyecto ya puede tener imágenes subidas en la carpeta raíz:
+
+1. Antes de diseñar, busca imágenes en la raíz del proyecto (`.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`) y úsalas con rutas relativas, con `alt` descriptivo y `loading="lazy"` (excepto la del hero).
+2. No muevas, renombres, borres ni modifiques esas imágenes, y no añadas imágenes nuevas por tu cuenta.
+3. Si no hay imágenes para algo, usa **SVG dentro del HTML** para iconos y logo, y efectos CSS (degradados, brillos).
+4. Si el usuario menciona un logo o fotos que no encuentras, pregúntale dónde están.
 
 ## Antes de escribir código: reunir los datos
 
@@ -46,7 +64,7 @@ Si el usuario quiere ver algo ya, genera la página con marcadores visibles como
 6. **Contacto** con titular grande ("Empieza tu proyecto *hoy*"), formulario y datos directos.
 7. **Pie** con año, nombre y redes.
 
-Cada sección se activa con un solo llamado a la acción: contactar.
+La página entera empuja un solo llamado a la acción: contactar.
 
 ## Estilo visual
 
@@ -63,7 +81,7 @@ Referencia del usuario: la estética de majestyk.com. Lo que se toma de ella es 
 
 El acento por defecto es turquesa (`#3be8c4`), distinto a propósito del magenta de esa web para que Shaip tenga identidad propia. Si el usuario tiene colores de marca o prefiere otro acento, cámbialo en `:root` de `styles.css` y nada más.
 
-Si el usuario cita otra página como referencia de estilo, usa `web_fetch` para analizar su estructura y copy, y traduce lo que encuentres a estas mismas reglas. Nunca copies textos, imágenes, logos ni código de la web de referencia.
+Si el usuario cita otra página como referencia de estilo, consúltala con tu herramienta de acceso web (webfetch) si la tienes disponible; si no, pídele que describa lo que le gusta. Traduce lo que encuentres a estas mismas reglas. Nunca copies textos, imágenes, logos ni código de la web de referencia.
 
 ## Reglas de contenido
 
@@ -79,17 +97,27 @@ Si el usuario cita otra página como referencia de estilo, usa `web_fetch` para 
   - Formulario con `action="https://formspree.io/f/XXXXXXXX"` (o Netlify Forms si el hosting es Netlify). Mientras el ID siga siendo `XXXXXXXX`, `script.js` abre el correo del visitante con `mailto:` para que nunca falle en silencio. Deja claro al usuario que debe crear su cuenta gratuita y pegar su ID.
 - Enlaces directos: `tel:` y `mailto:`.
 - **Móvil primero**: la mayoría de visitas vendrán de Instagram en el celular. Botones de al menos 44 px de alto, sin scroll horizontal.
-- **Movimiento responsable**: respeta `prefers-reduced-motion` (ya incluido en la plantilla). Sin JS el contenido debe seguir visible: las animaciones de aparición solo se activan cuando `script.js` añade la clase `js` al `<html>`.
+- **Movimiento responsable**: respeta `prefers-reduced-motion` en el CSS. Sin JS el contenido debe seguir visible: las animaciones de aparición solo se activan cuando `script.js` añade la clase `js` al `<html>`.
 - **Accesibilidad**: `<label>` en cada campo, contraste suficiente, foco visible, enlace "Saltar al contenido", jerarquía de encabezados correcta, `lang="es"`, `aria-hidden` en decoración.
 - **SEO básico**: `<title>`, `meta description`, Open Graph y JSON-LD tipo `LocalBusiness` con los datos reales.
 - Sin `localStorage` ni cookies; no hace falta aviso de cookies si no se rastrea nada. Si el usuario pide analítica, menciónale ese requisito legal.
 
-## Entrega
+## Dónde escribir y cómo verificar
 
-1. Guarda `index.html`, `styles.css` y `script.js` juntos en `/mnt/user-data/outputs/` y preséntalos con `index.html` primero. Los tres deben estar en la misma carpeta para que los enlaces relativos funcionen.
-2. Resume en 3 a 5 líneas: qué se hizo, qué datos quedaron pendientes y qué debe configurar el usuario (ID de Formspree, por ejemplo).
-3. Ofrece como siguiente paso cómo publicarla gratis (Netlify, GitHub Pages o Cloudflare Pages) y poner el enlace en la biografía de Instagram.
+1. Escribe los tres archivos en el proyecto actual, juntos en la misma carpeta (la raíz o la que indique el usuario) para que los enlaces relativos funcionen. Si ya existen, **edítalos** en lugar de sobrescribirlos. Nunca escribas dentro de la carpeta de esta skill.
+2. Busca marcadores pendientes (`[CORREO]`, `[TELÉFONO]`, `[HORARIO]`, `[INSTAGRAM_URL]`, `[NUMERO]`, `[CIUDAD / ZONA]`) y avisa al usuario de los que sigan sin reemplazar.
+3. Si hay Node disponible, valida la sintaxis con `node --check script.js`.
+4. Dile cómo verla en local: abrir `index.html` en el navegador o, desde esa carpeta, `python3 -m http.server 8000` y entrar a `http://localhost:8000`.
+
+## Resumen final al usuario
+
+En 3 a 5 líneas:
+
+1. Qué archivos modificaste o creaste (lista exacta, para su commit).
+2. Qué datos quedaron pendientes y qué debe configurar (ID de Formspree, por ejemplo).
+3. Un recordatorio breve: **no se hizo commit ni push; los cambios están sin confirmar en su copia de trabajo**.
+4. Como siguiente paso opcional, cómo publicarla gratis (Netlify, GitHub Pages o Cloudflare Pages) y poner el enlace en la biografía de Instagram.
 
 ## Modificaciones posteriores
 
-Si el usuario pide cambios sobre una página ya creada, edita los archivos existentes en lugar de regenerarlos desde cero. Cambia solo lo pedido y toca únicamente el archivo que corresponda (un color vive en `styles.css`, un texto en `index.html`).
+Si el usuario pide cambios sobre una página ya creada, edita los archivos existentes en lugar de regenerarlos desde cero. Cambia solo lo pedido y toca únicamente el archivo que corresponda (un color vive en `styles.css`, un texto en `index.html`). Las mismas reglas de git aplican siempre.
