@@ -1,0 +1,17 @@
+# Archivos internos: NO forman parte del sitio publicado.
+# Wrangler excluye del upload todo lo que coincida con estos patrones.
+
+.assetsignore
+.gitignore
+
+# Configuración de herramientas y notas internas
+.opencode/
+*.md
+*.pdf
+.wrangler/
+node_modules/
+*:Zone.Identifier
+
+# Variantes en desuso (la publicada es index.html + styles.css + script.js)
+index-light.html
+styles-light.css
