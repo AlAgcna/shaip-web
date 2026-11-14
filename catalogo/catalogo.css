@@ -235,6 +235,20 @@
   transform: scale(1.03);
 }
 
+/* Fallback para navegadores sin aspect-ratio (iOS < 15, Android viejo):
+   el alto se calcula con padding y la imagen se posiciona encima. */
+@supports not (aspect-ratio: 5 / 8) {
+  .model-media {
+    height: 0;
+    padding-top: 160%;
+  }
+  .model-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
 .model-tag {
   position: absolute;
   top: 0.75rem;
