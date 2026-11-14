@@ -49,7 +49,9 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear().toString();
 
   const form = document.getElementById('contact-form');
-  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  // threshold 0: una sección puede ser mucho más alta que la pantalla (el grid de
+  // modelos mide ~8400px en celular), y con 0.1 nunca llegaba a intersectar al 10%.
+  const observerOptions = { threshold: 0, rootMargin: '0px 0px -50px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
